@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>PlantGuard AI | Smart Disease Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="leaf leaf-1"></div>
+        <div class="leaf leaf-2"></div>
+        <div class="leaf leaf-3"></div>
+        <div class="leaf leaf-4"></div>
+    </div>
+
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>PlantGuard <span>AI</span></h1>
+                    <p>Smart Disease Detection for Healthy Crops</p>
+                </div>
+            </div>
+            <div class="header-badge">
+                <i class="fas fa-robot"></i>
+                <span>AI-Powered</span>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="hero-content">
+                <h2>Detect Plant Diseases Instantly</h2>
+                <p>Upload a photo of any plant leaf and our AI will identify diseases with high accuracy, providing instant remedies and care tips.</p>
+                <div class="stats">
+                    <div class="stat">
+                        <span class="stat-number">14+</span>
+                        <span class="stat-label">Plants Supported</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">38</span>
+                        <span class="stat-label">Disease Classes</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">96%</span>
+                        <span class="stat-label">Accuracy</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div classfloating-leaf">
+                    <i class="fas fa-seedling"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Upload Card -->
+        <div class="upload-card glass-effect">
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <h3>Upload Leaf Image</h3>
+                <p>Drag & drop or click to browse</p>
+                <p class="file-info">Supports JPG, PNG, WebP (Max 16MB)</p>
+                <button class="btn btn-primary" id="uploadBtn">
+                    <i class="fas fa-camera"></i>
+                    Choose Image
+                </button>
+                <input type="file" id="fileInput" accept="image/*" hidden>
+            </div>
+
+            <!-- Preview Section -->
+            <div id="previewSection" style="display: none;">
+                <div class="preview-container">
+                    <div class="image-preview">
+                        <img id="previewImage" alt="Leaf preview">
+                        <button class="btn-clear" id="clearBtn">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading Animation -->
+            <div id="loadingSection" style="display: none;">
+                <div class="loading-animation">
+                    <div class="pulse-leaf">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="loading-text">
+                        <h4>Analyzing Leaf...</h4>
+                        <p>Our AI is examining the image</p>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="resultsSection" style="display: none;">
+            <div class="results-card glass-effect">
+                <div class="results-header">
+                    <h3><i class="fas fa-chart-line"></i> Analysis Results</h3>
+                    <div class="confidence-badge" id="confidenceBadge"></div>
+                </div>
+
+                <!-- Main Prediction -->
+                <div class="main-result" id="mainResult"></div>
+
+                <!-- Alternative Predictions -->
+                <div class="alternatives-section" id="alternativesSection" style="display: none;">
+                    <h4><i class="fas fa-chart-simple"></i> Other Possibilities</h4>
+                    <div id="alternativesList"></div>
+                </div>
+
+                <!-- Remedies & Recommendations -->
+                <div class="remedies-section" id="remediesSection">
+                    <h4><i class="fas fa-leaf"></i> Recommended Actions</h4>
+                    <div id="remediesContent"></div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" id="newAnalysisBtn">
+                        <i class="fas fa-plus-circle"></i>
+                        New Analysis
+                    </button>
+                    <button class="btn btn-outline" id="shareBtn">
+                        <i class="fas fa-share-alt"></i>
+                        Share Results
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- How It Works Section -->
+        <div class="info-section glass-effect">
+            <h3><i class="fas fa-brain"></i> How PlantGuard AI Works</h3>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-upload"></i>
+                    </div>
+                    <h4>1. Upload</h4>
+                    <p>Take a clear photo of the affected leaf</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h4>2. Analyze</h4>
+                    <p>AI processes the image using Deep Learning</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4>3. Detect</h4>
+                    <p>Identifies disease with confidence score</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h4>4. Act</h4>
+                    <p>Get remedies and treatment suggestions</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Supported Plants Section -->
+        <div class="plants-section glass-effect">
+            <h3><i class="fas fa-tree"></i> Supported Plants</h3>
+            <div class="plants-grid" id="plantsGrid">
+                <!-- Plants will be populated via JavaScript -->
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <i class="fas fa-leaf"></i>
+                    <span>PlantGuard AI - Your Smart Agriculture Assistant</span>
+                </div>
+                <div class="footer-links">
+                    <a href="#" id="aboutBtn"><i class="fas fa-info-circle"></i> About</a>
+                    <a href="#" id="contactBtn"><i class="fas fa-envelope"></i> Contact</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal for About -->
+    <div id="aboutModal" class="modal">
+        <div class="modal-content glass-effect">
+            <span class="close">&times;</span>
+            <h2><i class="fas fa-leaf"></i> About PlantGuard AI</h2>
+            <p>PlantGuard AI is an advanced plant disease detection system powered by deep learning and computer vision. Our model is trained on over 87,900 images across 38 disease classes, achieving 96-99% accuracy.</p>
+            <br>
+            <p><strong>Technology:</strong> MobileNetV2 Transfer Learning, TensorFlow, Flask</p>
+            <p><strong>Dataset:</strong> New Plant Diseases Dataset (PlantVillage)</p>
+            <p><strong>Purpose:</strong> Helping farmers and gardeners detect plant diseases early for better crop management.</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
